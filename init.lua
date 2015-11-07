@@ -5,17 +5,21 @@
 local item1 = "default:diamond 3"
 local item2 = "default:steel_ingot 10"
 local item3 = "default:sand 5"
---local item4 = "default:pick_steel"
+local item4 = "default:pick_steel"
 local item5 = "default:mese_crystal 3"
 
 local item_spawn = function(pos, node, player, itemstack, pointed_thing)
 		minetest.add_node(pos, {name="myitemchest:chest_open_storage", param2=node.param2})
 		minetest.add_node({x=pos.x,y=pos.y+1,z=pos.z}, {name="myitemchest:chest_formspec", param2=node.param2})
-		minetest.spawn_item({x=pos.x,y=pos.y+0.5,z=pos.z}, item1)
-		minetest.spawn_item({x=pos.x,y=pos.y+0.5,z=pos.z}, item2)
-		minetest.spawn_item({x=pos.x,y=pos.y+0.5,z=pos.z}, item3)
-		--minetest.spawn_item({x=pos.x,y=pos.y+0.5,z=pos.z}, item4)
-		minetest.spawn_item({x=pos.x,y=pos.y+0.5,z=pos.z}, item5)
+		minetest.spawn_item(pos, item1)
+		minetest.spawn_item(pos, item2)
+		minetest.spawn_item(pos, item3)
+		minetest.spawn_item(pos, item4)
+		minetest.spawn_item(pos, item5)
+				local objs = minetest.get_objects_inside_radius(pos, 0.5)
+				for k, objects in pairs(objs) do
+				objects:moveto({x=pos.x,y=pos.y+1,z=pos.z})
+				end
 	end
 
 local check_air = function(itemstack, placer, pointed_thing)

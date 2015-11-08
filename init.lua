@@ -1,5 +1,5 @@
---To add or delete items modify the lines below. 
---Add or delete local item# 
+--To add or delete items modify the lines below.
+--Add or delete local item#
 --For each local item# add or delete the minetest.spawn_item in the next section.
 
 local item1 = "default:diamond 3"
@@ -8,30 +8,34 @@ local item3 = "default:sand 5"
 local item4 = "default:pick_steel"
 local item5 = "default:mese_crystal 3"
 
-local item_spawn = function(pos, node, player, itemstack, pointed_thing)
-		minetest.add_node(pos, {name="myitemchest:chest_open_storage", param2=node.param2})
-		minetest.add_node({x=pos.x,y=pos.y+1,z=pos.z}, {name="myitemchest:chest_formspec", param2=node.param2})
-		minetest.spawn_item(pos, item1)
-		minetest.spawn_item(pos, item2)
-		minetest.spawn_item(pos, item3)
-		minetest.spawn_item(pos, item4)
+local item_spawn = function(pos, node)
+	pos.y = pos.y-0.3
+	local objs = {
+		minetest.spawn_item(pos, item1),
+		minetest.spawn_item(pos, item2),
+		minetest.spawn_item(pos, item3),
+		minetest.spawn_item(pos, item4),
 		minetest.spawn_item(pos, item5)
-				local objs = minetest.get_objects_inside_radius(pos, 0.5)
-				for k, objects in pairs(objs) do
-				objects:moveto({x=pos.x,y=pos.y+1,z=pos.z})
-				end
+	}
+	pos.y = pos.y+0.3
+	minetest.add_node(pos, {name="myitemchest:chest_open_storage", param2=node.param2})
+	minetest.add_node({x=pos.x,y=pos.y+1,z=pos.z}, {name="myitemchest:chest_formspec", param2=node.param2})
+	--pos.y = pos.y-0.5
+	for _,object in pairs(objs) do
+		object:setvelocity({x=0, y=4.5, z=0})
 	end
+end
 
 local check_air = function(itemstack, placer, pointed_thing)
 			local pos = pointed_thing.above
 			local nodea = minetest.get_node({x=pos.x,y=pos.y+1,z=pos.z})
 				if nodea.name ~= "air" then
 				minetest.chat_send_player( placer:get_player_name(), "Need room above chest" )
-				return 
+				return
 				end
 			return minetest.item_place(itemstack, placer, pointed_thing)
 			end
-			
+
 local dig_it = function(pos, node, digger)
 		local meta = minetest.get_meta({x=pos.x,y=pos.y+1,z=pos.z});
 		local inv = meta:get_inventory()

@@ -18,8 +18,8 @@ local item_spawn = function(pos, node)
 		minetest.spawn_item(pos, item5)
 	}
 	pos.y = pos.y+0.3
-	minetest.add_node(pos, {name="myitemchest:chest_open_storage", param2=node.param2})
-	minetest.add_node({x=pos.x,y=pos.y+1,z=pos.z}, {name="myitemchest:chest_formspec", param2=node.param2})
+	minetest.set_node(pos, {name="myitemchest:chest_open_storage", param2=node.param2})
+	minetest.set_node({x=pos.x,y=pos.y+1,z=pos.z}, {name="myitemchest:chest_formspec", param2=node.param2})
 	--pos.y = pos.y-0.5
 	for _,object in pairs(objs) do
 		object:setvelocity({x=0, y=4.5, z=0})
@@ -41,7 +41,7 @@ local dig_it = function(pos, node, digger)
 		local inv = meta:get_inventory()
 		local nodeu = minetest.get_node({x=pos.x,y=pos.y+1,z=pos.z})
 		if nodeu.name == "myitemchest:chest_formspec" and
-			inv:is_empty("main") == true then
+			inv:is_empty("main") then
 			minetest.remove_node({x=pos.x,y=pos.y+1,z=pos.z})
 			minetest.remove_node(pos)
 			minetest.spawn_item(pos,"myitemchest:chest_storage")

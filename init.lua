@@ -90,9 +90,9 @@ minetest.register_node("myitemchest:chest", {
 	tiles = {
 		"myitemchest_chest_top.png",
 		"myitemchest_chest_top.png",
-		"myitemchest_chest_front.png",
-		"myitemchest_chest_front.png",
-		"myitemchest_chest_front.png",
+		"myitemchest_chest_side.png^[transformFX",
+		"myitemchest_chest_side.png",
+		"myitemchest_chest_back.png",
 		"myitemchest_chest_front.png"
 	},
 	drawtype = "nodebox",
@@ -111,9 +111,9 @@ minetest.register_node("myitemchest:chest_storage", {
 	tiles = {
 		"myitemchest_chest_top.png",
 		"myitemchest_chest_top.png",
-		"myitemchest_chest_front.png",
-		"myitemchest_chest_front.png",
-		"myitemchest_chest_front.png",
+		"myitemchest_chest_side.png^[transformFX",
+		"myitemchest_chest_side.png",
+		"myitemchest_chest_back.png",
 		"myitemchest_chest_front.png"
 	},
 	drawtype = "nodebox",
@@ -141,10 +141,10 @@ minetest.register_node("myitemchest:chest_open_storage", {
 	tiles = {
 		"myitemchest_chest_open_top.png",
 		"myitemchest_chest_open_top.png",
-		"myitemchest_chest_open_side.png",
-		"myitemchest_chest_open_side.png^[transformFx",
-		"myitemchest_chest_top.png",
-		"myitemchest_chest_top.png"
+		"myitemchest_chest_side.png^[transformFx",
+		"myitemchest_chest_side.png",
+		"myitemchest_chest_back.png",
+		"myitemchest_chest_front_open.png"
 	},
 	drawtype = "nodebox",
 	paramtype = "light",

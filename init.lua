@@ -273,3 +273,8 @@ core.register_node("myitemchest:chest_formspec", {
 
 	end,
 })
+if core.get_modpath("lucky_block") then
+	lucky_block:add_blocks({
+		{"dro", {"myitemchest:chest"}, 1},
+	})
+end
